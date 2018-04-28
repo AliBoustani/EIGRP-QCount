@@ -1,2 +1,3 @@
-# EIGRP-QCount
-Python3 App to extract EIGRP to Quere Count of each neighbor !!
+# EIGRP-Q Count
+#Python App to extract EIGRP Queue Count of each neighbour!!
+#I tried to use different modules to avoid complexity!!

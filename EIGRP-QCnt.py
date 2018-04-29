@@ -10,7 +10,7 @@ import ipaddress
 import io
 
 
-#Are IPs valid????
+#Get and Validate the IP(s)
 def ip_is_valid():
     check = False
     global ip_list
@@ -20,7 +20,7 @@ def ip_is_valid():
         ip_file = input("*** Please Enter the IP file name [example: ip.txt] *** : ")
         print ("\n# # # # # # # # # # # # # # # # # # # # # # # # # # # #\n")
         #You can specifiy your IP file name like below and remove the above question ;)
-		#ip_file = "ip.txt"
+	#ip_file = "ip.txt"
         try:
 			#Opening the IP file
             selected_ip_file = open(ip_file, 'r')
@@ -95,8 +95,9 @@ def user_is_valid():
         print ("*** Note : Usename and Password should be separated by comma , ***\n")
         user_file = input("*** Please Enter the Username & Password file name [example: id.txt ] *** : ")
         #You can specifiy your user/pass file name like below and remove the above question ;) 
-		#user_file = "username.txt"
-        if os.path.isfile(user_file) == True:
+	#user_file = "username.txt"
+        #OS.path will check the existence of given file!
+	if os.path.isfile(user_file) == True:
             break
         else:
             print("\n ***There is no %s !! Please check it againg !! ***\n" % user_file)
@@ -139,10 +140,9 @@ def open_ssh_conn(ip):
         session.connect(ip, username = username, password = password)
         connection = session.invoke_shell()	
         
-        #connection.send("terminal length 0\n")
         time.sleep(1)
         
-        #Special needed commands
+        #Commands to show the q-count ;)
         connection.send("\n")
         connection.send("show ip eigrp neighbors \n")
         time.sleep(1)
@@ -150,7 +150,7 @@ def open_ssh_conn(ip):
         selected_user_file.close()
         
         router_output = connection.recv(65535)
-
+        
         output = router_output.decode('utf-8')
         hostname1 = re.findall(r"(.+)#show ip eigrp neighbors", output)
         print ("\n\n")
@@ -162,13 +162,13 @@ def open_ssh_conn(ip):
             line = line.strip()	
             out = re.findall(r"^\d+\s{1,}(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}).{55,65}\s{1,}(\d+)\s{1,}\d+", line)
             if out :	
-                print("   Queue Count for neighbor %s is : %s  \n" %(out[0][0],out[0][1]) )
+                print(" The Queue Count for neighbor %s is : %s  \n" %(out[0][0],out[0][1]) )
         print("\n *** Device %s Done !!! ***\n" %hostname1[0])
         print("**********************************************************")
 
         time.sleep(1)
 		
-		#Closing the connection
+	#Closing the connection
         session.close()
      
     except paramiko.AuthenticationException:

@@ -150,7 +150,7 @@ def open_ssh_conn(ip):
         selected_user_file.close()
         
         router_output = connection.recv(65535)
-        
+        #Change the time of output to makes it readable!
         output = router_output.decode('utf-8')
         hostname1 = re.findall(r"(.+)#show ip eigrp neighbors", output)
         print ("\n\n")
@@ -176,9 +176,6 @@ def open_ssh_conn(ip):
         print("*** Please check the Usernmae and Password !!***\n\n")
 
 		
-
-
-       
 #Threading
 def create_threads():
     threads = []

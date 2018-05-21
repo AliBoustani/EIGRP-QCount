@@ -150,13 +150,14 @@ def open_ssh_conn(ip):
         selected_user_file.close()
         
         router_output = connection.recv(65535)
-        #Change the time of output to makes it readable!
         output = router_output.decode('utf-8')
         hostname1 = re.findall(r"(.+)#show ip eigrp neighbors", output)
         print ("\n\n")
         print ("**********************************************************")
         print ("Starint for hostname %s . . . . . \n" %hostname1[0])
-        output = io.StringIO(output)
+        
+	#Changing the type of output to makes it readable by readlines module!
+	output = io.StringIO(output)
         all_outputs = output.readlines()
         for line in all_outputs:
             line = line.strip()	

@@ -118,7 +118,7 @@ except KeyboardInterrupt:
     sys.exit()
 
 
-#SSHv2 connection # I decided to rewrite the application using NAPLAM, Please follow on the next update ;)
+#SSHv2 connection
 def open_ssh_conn(ip):
     global router_output
     try:
